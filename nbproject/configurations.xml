@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>AppConfig.h</itemPath>
+      <itemPath>BoatMotorDriver.h</itemPath>
+      <itemPath>GPSFileReader.h</itemPath>
+      <itemPath>GPSParser.h</itemPath>
+      <itemPath>GPSReader.h</itemPath>
+      <itemPath>GPSUtils.h</itemPath>
+      <itemPath>GPSWebServer.h</itemPath>
+      <itemPath>Navigation.h</itemPath>
+      <itemPath>PaulNovackGlobals.h</itemPath>
+      <itemPath>WebServer.h</itemPath>
+      <itemPath>json.hpp</itemPath>
+      <itemPath>mySQLConnectionPool.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+      <itemPath>TripToLowes.txt</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>.env</itemPath>
+      <itemPath>AppConfig.cpp</itemPath>
+      <itemPath>BoatMotorDriver.cpp</itemPath>
+      <itemPath>GPSFileReader.cpp</itemPath>
+      <itemPath>GPSParser.cpp</itemPath>
+      <itemPath>GPSReader.cpp</itemPath>
+      <itemPath>GPSUtils.cpp</itemPath>
+      <itemPath>GPSWebServer.cpp</itemPath>
+      <itemPath>Navigation.cpp</itemPath>
+      <itemPath>WebServer.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
+      <itemPath>mySQLConnectionPool.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+    <itemPath>destination.json</itemPath>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>GNU|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>11</standard>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
+            <linkerOptionItem>`pkg-config --libs mariadb`</linkerOptionItem>
+            <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
+            <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
+            <linkerLibStdlibItem>DynamicLinking</linkerLibStdlibItem>
+            <linkerOptionItem>`pkg-config --libs libmariadb`</linkerOptionItem>
+          </linkerLibItems>
+          <commandLine>-lmysqlcppconn</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path=".env" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AppConfig.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AppConfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="BoatMotorDriver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BoatMotorDriver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GPSFileReader.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GPSFileReader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GPSParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GPSParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GPSReader.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GPSReader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GPSUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GPSUtils.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GPSWebServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GPSWebServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Navigation.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Navigation.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PaulNovackGlobals.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TripToLowes.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="WebServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="WebServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="destination.json" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="json.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="mySQLConnectionPool.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="mySQLConnectionPool.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <standard>11</standard>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path=".env" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AppConfig.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AppConfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="BoatMotorDriver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BoatMotorDriver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GPSFileReader.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GPSFileReader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GPSParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GPSParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GPSReader.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GPSReader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GPSUtils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GPSUtils.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GPSWebServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GPSWebServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Navigation.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Navigation.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PaulNovackGlobals.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TripToLowes.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="WebServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="WebServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="destination.json" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="json.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="mySQLConnectionPool.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="mySQLConnectionPool.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
