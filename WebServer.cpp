@@ -1,5 +1,47 @@
 #include "WebServer.h"
 
+namespace crow {
+  // Any middleware requires following 3 members:
+
+  // struct context;
+  //      storing data for the middleware; can be read from another middleware or handlers
+
+  // before_handle
+  //      called before handling the request.
+  //      if res.end() is called, the operation is halted. 
+  //      (still call after_handle of this middleware)
+  //      2 signatures:
+  //      void before_handle(request& req, response& res, context& ctx)
+  //          if you only need to access this middlewares context.
+  //      template <typename AllContext>
+  //      void before_handle(request& req, response& res, context& ctx, AllContext& all_ctx)
+  //          you can access another middlewares' context by calling `all_ctx.template get<MW>()'
+  //          ctx == all_ctx.template get<CurrentMiddleware>()
+
+  // after_handle
+  //      called after handling the request.
+  //      void after_handle(request& req, response& res, context& ctx)
+  //      template <typename AllContext>
+  //      void after_handle(request& req, response& res, context& ctx, AllContext& all_ctx)
+
+  struct CORS {
+
+    struct context {};
+
+    void before_handle(request& req, response& res, context& ctx) {
+      // Handle CORS headers here
+      res.add_header("Access-Control-Allow-Origin", "*");
+      res.add_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+      res.add_header("Access-Control-Allow-Headers", "Content-Type");
+      res.add_header("Access-Control-Max-Age", "86400"); // Optional: Specify max age for preflight requests
+      res.add_header("Content-Type", "application/json");
+    }
+
+    void after_handle(request& req, response& res, context& ctx) {}
+  };
+
+}
+
 namespace PaulNovack {
 
   class Navigation;
@@ -14,7 +56,7 @@ namespace PaulNovack {
 
   void WebServer::Run() {
 
-    crow::SimpleApp app;
+    crow::App<crow::CORS> app;
     app.loglevel(crow::LogLevel::ERROR);
     CROW_ROUTE(app, "/getNavigationData")
             .methods("GET"_method)
@@ -62,9 +104,6 @@ namespace PaulNovack {
                 // Set the response body with the JSON data
                 res.body = response.dump();
 
-                // Set the Content-Type header to application/json
-                res.add_header("Content-Type", "application/json");
-
                 // Set the response status to 200 OK
                 res.code = 200;
               } catch (const std::exception& e) {
@@ -97,7 +136,7 @@ namespace PaulNovack {
                 res.body = response.dump();
 
                 // Set the Content-Type header to application/json
-                res.add_header("Content-Type", "application/json");
+
 
                 // Set the response status to 200 OK
                 res.code = 200;
@@ -114,7 +153,7 @@ namespace PaulNovack {
     CROW_ROUTE(app, "/getWaypoints")([this]() {
       return "getWaypoints to do gets from database stored waypoints.....";
     });
-    CROW_ROUTE(app, "/findWaypoints/<string>")([this]( string search) {
+    CROW_ROUTE(app, "/findWaypoints/<string>")([this](string search) {
       return "getWaypoints to do gets from database stored waypoints.....";
     });
     CROW_ROUTE(app, "/")([this]() {
