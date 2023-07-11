@@ -50,15 +50,20 @@ namespace PaulNovack {
           MAX_TURN_STEPS = std::stoi(value);
         else if (key == "STEPS_PER_CORRECTION")
           STEPS_PER_CORRECTION = std::stoi(value);
-           else if (key == "DB_DATABASE_NAME")
+        else if (key == "DB_DATABASE_NAME")
           DB_DATABASE_NAME = value;
-                else if (key == "DB_USERNAME")
+        else if (key == "DB_USERNAME")
           DB_USERNAME = value;
-                   else if (key == "DB_PASSWORD")
+        else if (key == "DB_PASSWORD")
           DB_PASSWORD = value;
-                        else if (key == "DB_HOST")
+        else if (key == "DB_HOST")
           DB_HOST = value;
-        
+        else if (key == "DB_HEARTBEAT_INTERVAL")
+          DB_HEARTBEAT_INTERVAL = std::stoi(value);
+        else if (key == "DB_POOL_SIZE")
+          DB_POOL_SIZE = std::stoi(value);
+
+
 
       }
     }

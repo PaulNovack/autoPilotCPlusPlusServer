@@ -31,6 +31,9 @@ namespace PaulNovack {
         string DB_USERNAME;
         string DB_PASSWORD;
         string DB_HOST;
+        int DB_HEARTBEAT_INTERVAL;
+        int DB_POOL_SIZE;
+        
     private:
     };
 }
