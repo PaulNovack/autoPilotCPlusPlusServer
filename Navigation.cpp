@@ -87,7 +87,7 @@ namespace PaulNovack {
           float heading,
           float speedKnots,
           float speedMPH,
-          bool  usingGoBackSecondsSpeedCalculation,
+          bool usingGoBackSecondsSpeedCalculation,
           string hdop,
           string pdop) {
     lock_guard<mutex> lock(nav_mutex);
@@ -271,6 +271,12 @@ namespace PaulNovack {
       latLongArray[i + 1] = latLongArray[i];
     }
     latLongArray[0] = element;
+  }
+
+  void Navigation::setDestination(float Latitude, float Longitude) {
+    lock_guard<mutex> lock(nav_mutex);
+    this->_destLatitude = Latitude;
+    this->_destLongitude = Longitude;
   }
 
 }

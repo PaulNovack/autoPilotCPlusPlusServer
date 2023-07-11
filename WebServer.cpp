@@ -26,7 +26,8 @@ namespace crow {
 
   struct CORS {
 
-    struct context {};
+    struct context {
+    };
 
     void before_handle(request& req, response& res, context& ctx) {
       // Handle CORS headers here
@@ -37,7 +38,8 @@ namespace crow {
       res.add_header("Content-Type", "application/json");
     }
 
-    void after_handle(request& req, response& res, context& ctx) {}
+    void after_handle(request& req, response& res, context& ctx) {
+    }
   };
 
 }
@@ -84,7 +86,7 @@ namespace PaulNovack {
 
     CROW_ROUTE(app, "/setWaypoint")
             .methods("POST"_method)
-            ([](const crow::request& req, crow::response & res) {
+            ([this](const crow::request& req, crow::response & res) {
               try {
                 // Parse the JSON data from the request body
                 json jsonData = json::parse(req.body);
@@ -118,7 +120,7 @@ namespace PaulNovack {
 
     CROW_ROUTE(app, "/setDestination")
             .methods("POST"_method)
-            ([](const crow::request& req, crow::response & res) {
+            ([this](const crow::request& req, crow::response & res) {
               try {
                 // Parse the JSON data from the request body
                 json jsonData = json::parse(req.body);
@@ -131,7 +133,7 @@ namespace PaulNovack {
                 json response;
                 response["destinationLatitude"] = destinationLatitude;
                 response["destinationLongitude"] = destinationLongitude;
-
+                _navigation->setDestination(destinationLatitude,destinationLongitude);
                 // Set the response body with the JSON data
                 res.body = response.dump();
 

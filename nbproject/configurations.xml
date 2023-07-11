@@ -69,7 +69,6 @@
         <linkerTool>
           <linkerLibItems>
             <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
-            <linkerOptionItem>`pkg-config --libs mariadb`</linkerOptionItem>
             <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
             <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
             <linkerLibStdlibItem>DynamicLinking</linkerLibStdlibItem>

@@ -47,7 +47,7 @@ namespace PaulNovack {
         TurnData getTurnData();
         void setConfig(AppConfig& config);
         NavData getNavData();
-        
+        void setDestination(float Latitude,float Longitude);
     private:
         
         static const int MAX_SIZE = 300;
