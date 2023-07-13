@@ -12,6 +12,7 @@
 #include "PaulNovackGlobals.h"
 #include "AppConfig.h"
 #include "WebServer.h"
+#include "DataStore.h"
 
 using namespace PaulNovack;
 
@@ -25,7 +26,6 @@ bool isDirectory(const string& path) {
   }
   return S_ISDIR(fileInfo.st_mode);
 }
- MySQLConnectionPool connectionPool("127.0.0.1", "boxes", "boxes", "boxes", 250, 20);
 
 
 int main(int argc, char* argv[]) {
@@ -52,6 +52,7 @@ int main(int argc, char* argv[]) {
   }
   AppConfig config(applicationRoot + "/.env");
 
+  DataStore ds = DataStore(config);
   GPSParser gpsParser;
   Navigation navigation;
   navigation.setConfig(config);
