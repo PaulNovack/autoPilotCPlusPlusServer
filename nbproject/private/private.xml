@@ -9,14 +9,24 @@
         <group>
             <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/.env</file>
             <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/WebServer.cpp</file>
+            <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/GPSFileReader.cpp</file>
+            <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/mySQLConnectionPool.h</file>
+            <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/GPSUtils.cpp</file>
+            <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/DataStore.cpp</file>
+            <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/AppConfig.cpp</file>
             <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/Navigation.cpp</file>
             <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/mySQLConnectionPool.cpp</file>
+            <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/Navigation.h</file>
+            <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/GPSFileReader.h</file>
             <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/AppConfig.h</file>
             <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/BoatMotorDriver.cpp</file>
             <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/GPSParser.cpp</file>
-            <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/AppConfig.cpp</file>
+            <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/PaulNovackGlobals.h</file>
             <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/json.hpp</file>
+            <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/WebServer.h</file>
+            <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/GPSUtils.h</file>
             <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/main.cpp</file>
+            <file>file:/home/pnovack/2023Code/boatAutopilot/autoPilotCPlusPlusServer/DataStore.h</file>
         </group>
     </open-files>
 </project-private>

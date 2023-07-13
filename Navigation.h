@@ -12,6 +12,7 @@
 #include "GPSUtils.h"
 #include "json.hpp"
 #include "AppConfig.h"
+#include "mySQLConnectionPool.h"
 
 using json = nlohmann::json;
 
@@ -25,6 +26,7 @@ namespace PaulNovack {
     public:
 
         Navigation();
+        Navigation(AppConfig& config);
         Navigation(const Navigation& orig);
         virtual ~Navigation();
         int ReadDestination();
@@ -47,9 +49,9 @@ namespace PaulNovack {
         TurnData getTurnData();
         void setConfig(AppConfig& config);
         NavData getNavData();
-        void setDestination(float Latitude,float Longitude);
+        void setDestination(float Latitude, float Longitude);
     private:
-        
+
         static const int MAX_SIZE = 300;
         LatLong latLongArray[MAX_SIZE];
         void pushLocationHistoryToFront(const LatLong& element);
@@ -78,7 +80,7 @@ namespace PaulNovack {
         bool _usingGoBackSecondsSpeedCalculation;
         string _hdop;
         string _pdop;
-
+        //MySQLConnectionPool& connectionPool; // Reference to MySQLConnectionPool
     };
 }
 #endif // NAVIGATION_H

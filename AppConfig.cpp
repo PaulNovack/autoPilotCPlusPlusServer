@@ -63,8 +63,6 @@ namespace PaulNovack {
         else if (key == "DB_POOL_SIZE")
           DB_POOL_SIZE = std::stoi(value);
 
-
-
       }
     }
     file.close();

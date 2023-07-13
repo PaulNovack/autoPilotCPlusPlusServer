@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/AppConfig.o \
 	${OBJECTDIR}/BoatMotorDriver.o \
+	${OBJECTDIR}/DataStore.o \
 	${OBJECTDIR}/GPSFileReader.o \
 	${OBJECTDIR}/GPSParser.o \
 	${OBJECTDIR}/GPSReader.o \
@@ -81,6 +82,11 @@ ${OBJECTDIR}/BoatMotorDriver.o: BoatMotorDriver.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BoatMotorDriver.o BoatMotorDriver.cpp
+
+${OBJECTDIR}/DataStore.o: DataStore.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DataStore.o DataStore.cpp
 
 ${OBJECTDIR}/GPSFileReader.o: GPSFileReader.cpp
 	${MKDIR} -p ${OBJECTDIR}

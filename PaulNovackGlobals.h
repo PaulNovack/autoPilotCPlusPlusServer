@@ -21,9 +21,12 @@ namespace PaulNovack {
     };
 
     struct WayPoint {
+        int id;
         std::string name;
         std::string description;
-        LatLong latLong;
+        float latitude;
+        float longitude;
+        float depth;
     };
 
     struct NavData {

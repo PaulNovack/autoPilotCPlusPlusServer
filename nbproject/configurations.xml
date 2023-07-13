@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>AppConfig.h</itemPath>
       <itemPath>BoatMotorDriver.h</itemPath>
+      <itemPath>DataStore.h</itemPath>
       <itemPath>GPSFileReader.h</itemPath>
       <itemPath>GPSParser.h</itemPath>
       <itemPath>GPSReader.h</itemPath>
@@ -28,6 +29,7 @@
       <itemPath>.env</itemPath>
       <itemPath>AppConfig.cpp</itemPath>
       <itemPath>BoatMotorDriver.cpp</itemPath>
+      <itemPath>DataStore.cpp</itemPath>
       <itemPath>GPSFileReader.cpp</itemPath>
       <itemPath>GPSParser.cpp</itemPath>
       <itemPath>GPSReader.cpp</itemPath>
@@ -86,6 +88,10 @@
       <item path="BoatMotorDriver.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BoatMotorDriver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataStore.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataStore.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="GPSFileReader.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -160,6 +166,10 @@
       <item path="BoatMotorDriver.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BoatMotorDriver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DataStore.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DataStore.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="GPSFileReader.cpp" ex="false" tool="1" flavor2="0">
       </item>
