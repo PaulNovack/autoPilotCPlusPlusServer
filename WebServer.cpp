@@ -184,7 +184,7 @@ namespace PaulNovack {
       return "AutoPilot Server.  Nothing here routes return JSON for UI.";
     });
 
-    app.port(18080).run();
+    app.port(18080).multithreaded().run_async();
   }
 
   WebServer::WebServer(const WebServer& orig) {
