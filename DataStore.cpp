@@ -1,10 +1,9 @@
 #include <cppconn/statement.h>
-
+#include <cppconn/prepared_statement.h>
 #include "DataStore.h"
 
 
 namespace PaulNovack {
-
 
   DataStore::DataStore(const AppConfig& config) {
     connectionPool_ = new MySQLConnectionPool(config.DB_HOST,
@@ -59,4 +58,57 @@ namespace PaulNovack {
     return WayPointsMap;
   }
 
-} // namespace PaulNovack
+  WayPoint DataStore::insertWayPoint(WayPoint wayPoint) {
+    sql::Connection* conn = connectionPool_->getConnection();
+    sql::PreparedStatement* pstmt;
+    WayPoint wp;
+
+    pstmt = conn->prepareStatement("UPDATE boxes SET user_id = ?, "
+            "name = ?, weight = ?, picture = ?, created_at = ? "
+            "WHERE id = ?");
+    //  pstmt->setInt(1, root["user_id"].asInt64);
+    //   pstmt->setString(2, root["name"].asString());
+    //   pstmt->setfloat(3, root["weight"].asfloat());
+    //  pstmt->setString(4, root["picture"].asString());
+    //   pstmt->setString(5, root["created_at"].asString());
+    //   pstmt->setInt64(6, root["id"].asInt64);
+    // pstmt->executeUpdate();
+    return wp;
+  }
+
+  WayPoint DataStore::updateWayPoint(WayPoint wayPoint) {
+    sql::Connection* conn = connectionPool_->getConnection();
+    sql::PreparedStatement* pstmt;
+    WayPoint wp;
+
+    pstmt = conn->prepareStatement("UPDATE boxes SET user_id = ?, "
+            "name = ?, weight = ?, picture = ?, created_at = ? "
+            "WHERE id = ?");
+    //  pstmt->setInt(1, root["user_id"].asInt64);
+    //   pstmt->setString(2, root["name"].asString());
+    //   pstmt->setfloat(3, root["weight"].asfloat());
+    //  pstmt->setString(4, root["picture"].asString());
+    //   pstmt->setString(5, root["created_at"].asString());
+    //   pstmt->setInt64(6, root["id"].asInt64);
+    // pstmt->executeUpdate();
+    return wp;
+  }
+
+  bool DataStore::deleteWayPoint(WayPoint wayPoint) {
+    sql::Connection* conn = connectionPool_->getConnection();
+    sql::PreparedStatement* pstmt;
+    WayPoint wp;
+
+    pstmt = conn->prepareStatement("UPDATE boxes SET user_id = ?, "
+            "name = ?, weight = ?, picture = ?, created_at = ? "
+            "WHERE id = ?");
+    //  pstmt->setInt(1, root["user_id"].asInt64);
+    //   pstmt->setString(2, root["name"].asString());
+    //   pstmt->setfloat(3, root["weight"].asfloat());
+    //  pstmt->setString(4, root["picture"].asString());
+    //   pstmt->setString(5, root["created_at"].asString());
+    //   pstmt->setInt64(6, root["id"].asInt64);
+    // pstmt->executeUpdate();
+    return true;
+  }
+} 

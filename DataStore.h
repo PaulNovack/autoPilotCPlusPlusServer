@@ -25,7 +25,10 @@ namespace PaulNovack {
 
         DataStore(const DataStore& orig);
         virtual ~DataStore();
-        std::map<int, WayPoint>  getWayPoints();
+        std::map<int, WayPoint> getWayPoints();
+        WayPoint insertWayPoint(WayPoint wayPoint);
+        WayPoint updateWayPoint(WayPoint wayPoint);
+        bool deleteWayPoint(WayPoint wayPoint);
     private:
         MySQLConnectionPool* connectionPool_;
     };
