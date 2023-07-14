@@ -71,7 +71,6 @@
         <linkerTool>
           <linkerLibItems>
             <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
-            <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
             <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
             <linkerLibStdlibItem>DynamicLinking</linkerLibStdlibItem>
             <linkerOptionItem>`pkg-config --libs libmariadb`</linkerOptionItem>
@@ -156,6 +155,15 @@
         <asmTool>
           <developmentMode>5</developmentMode>
         </asmTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
+            <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
+            <linkerLibStdlibItem>DynamicLinking</linkerLibStdlibItem>
+            <linkerOptionItem>`pkg-config --libs libmariadb`</linkerOptionItem>
+          </linkerLibItems>
+          <commandLine>-lmysqlcppconn</commandLine>
+        </linkerTool>
       </compileType>
       <item path=".env" ex="false" tool="3" flavor2="0">
       </item>

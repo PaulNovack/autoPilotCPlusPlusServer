@@ -63,7 +63,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lm -lm -lpthread -ldl `pkg-config --libs libmariadb`  
+LDLIBSOPTIONS=-lm -lpthread -ldl `pkg-config --libs libmariadb`  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}

@@ -63,7 +63,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-lm -lpthread -ldl `pkg-config --libs libmariadb`  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -71,67 +71,67 @@ LDLIBSOPTIONS=
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/autopilotcplusplusserver: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/autopilotcplusplusserver ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/autopilotcplusplusserver ${OBJECTFILES} ${LDLIBSOPTIONS} -lmysqlcppconn
 
 ${OBJECTDIR}/AppConfig.o: AppConfig.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AppConfig.o AppConfig.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AppConfig.o AppConfig.cpp
 
 ${OBJECTDIR}/BoatMotorDriver.o: BoatMotorDriver.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BoatMotorDriver.o BoatMotorDriver.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BoatMotorDriver.o BoatMotorDriver.cpp
 
 ${OBJECTDIR}/DataStore.o: DataStore.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DataStore.o DataStore.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DataStore.o DataStore.cpp
 
 ${OBJECTDIR}/GPSFileReader.o: GPSFileReader.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GPSFileReader.o GPSFileReader.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GPSFileReader.o GPSFileReader.cpp
 
 ${OBJECTDIR}/GPSParser.o: GPSParser.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GPSParser.o GPSParser.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GPSParser.o GPSParser.cpp
 
 ${OBJECTDIR}/GPSReader.o: GPSReader.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GPSReader.o GPSReader.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GPSReader.o GPSReader.cpp
 
 ${OBJECTDIR}/GPSUtils.o: GPSUtils.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GPSUtils.o GPSUtils.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GPSUtils.o GPSUtils.cpp
 
 ${OBJECTDIR}/GPSWebServer.o: GPSWebServer.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GPSWebServer.o GPSWebServer.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GPSWebServer.o GPSWebServer.cpp
 
 ${OBJECTDIR}/Navigation.o: Navigation.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Navigation.o Navigation.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Navigation.o Navigation.cpp
 
 ${OBJECTDIR}/WebServer.o: WebServer.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/WebServer.o WebServer.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/WebServer.o WebServer.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/mySQLConnectionPool.o: mySQLConnectionPool.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mySQLConnectionPool.o mySQLConnectionPool.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mySQLConnectionPool.o mySQLConnectionPool.cpp
 
 # Subprojects
 .build-subprojects:
