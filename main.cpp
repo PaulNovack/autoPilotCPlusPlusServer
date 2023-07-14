@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
   }
   AppConfig config(applicationRoot + "/.env");
 
-  DataStore ds = DataStore(config);
+  DataStore ds(config);
   GPSParser gpsParser;
   Navigation navigation;
   navigation.setConfig(config);
@@ -86,7 +86,7 @@ int main(int argc, char* argv[]) {
   // gpsFileReader.RunFileReader();
   WebServer webserver;
   webserver.setNavigation(navigation);
-  
+  webserver.setDataStore(ds);
   webserver.Run();
   
   return 0;

@@ -1,0 +1,12 @@
+Clear Lake Boat Public Boat Launch
+29.563666, -95.069606
+Clear Lake Shores Boat Launch
+29.550156, -95.029671
+Red Fish Island
+29.517139, -94.890802
+El Jardin Jetty
+29.594189, -94.987240
+Sylvan Beach Pier
+29.652692, -95.005378
+Houston Yacht Club Entrance
+29.621498, -94.997912

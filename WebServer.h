@@ -13,6 +13,7 @@
 #include "json.hpp"
 #include "AppConfig.h"
 #include "Navigation.h"
+#include "DataStore.h"
 #include "crow.h"
 
 using namespace std;
@@ -25,9 +26,11 @@ namespace PaulNovack {
         void Run();
         WebServer(const WebServer& orig);
         void setNavigation(Navigation& navigation);
+        void setDataStore(DataStore& ds);
         virtual ~WebServer();
     private:
         Navigation* _navigation;
+        DataStore* _ds;
     };
 }
 

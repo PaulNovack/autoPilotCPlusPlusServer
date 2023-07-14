@@ -56,6 +56,10 @@ namespace PaulNovack {
     _navigation = &navigation;
   }
 
+  void WebServer::setDataStore(DataStore& ds) {
+    _ds = &ds;
+  }
+
   void WebServer::Run() {
 
     crow::App<crow::CORS> app;
@@ -133,7 +137,7 @@ namespace PaulNovack {
                 json response;
                 response["destinationLatitude"] = destinationLatitude;
                 response["destinationLongitude"] = destinationLongitude;
-                _navigation->setDestination(destinationLatitude,destinationLongitude);
+                _navigation->setDestination(destinationLatitude, destinationLongitude);
                 // Set the response body with the JSON data
                 res.body = response.dump();
 
@@ -152,8 +156,26 @@ namespace PaulNovack {
               res.end();
             });
 
-    CROW_ROUTE(app, "/getWaypoints")([this]() {
-      return "getWaypoints to do gets from database stored waypoints.....";
+    CROW_ROUTE(app, "/getWaypoints")([this](const crow::request& req, crow::response & res) {
+      std::map<int, WayPoint> waypoints = _ds->getWayPoints();
+      json jsonResponse = json::array();
+      for (const auto& pair : waypoints) {
+        int id = pair.first;
+                const WayPoint& waypoint = pair.second;
+                json waypointJson;
+                waypointJson["id"] = id;
+                waypointJson["name"] = waypoint.name;
+                waypointJson["description"] = waypoint.description;
+                waypointJson["latitude"] = waypoint.latitude;
+                waypointJson["longitude"] = waypoint.longitude;
+                waypointJson["depth"] = waypoint.depth;
+                jsonResponse.push_back(waypointJson);
+      } // Set the response body with the JSON data
+      res.body = jsonResponse.dump();
+
+      // Set the response status to 200 OK
+      res.code = 200;
+      res.end();
     });
     CROW_ROUTE(app, "/findWaypoints/<string>")([this](string search) {
       return "getWaypoints to do gets from database stored waypoints.....";
