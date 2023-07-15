@@ -1,6 +1,5 @@
 #include "mySQLConnectionPool.h"
-#include <iostream>
-#include <chrono>
+
 
 
 MySQLConnectionPool::MySQLConnectionPool(const string& host,

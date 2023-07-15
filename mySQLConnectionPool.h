@@ -1,6 +1,8 @@
 #ifndef MYSQL_CONNECTION_POOL_H
 #define MYSQL_CONNECTION_POOL_H
 
+#include <iostream>
+#include <chrono>
 #include <string>
 #include <vector>
 #include <mutex>
