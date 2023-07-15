@@ -15,7 +15,7 @@ password_(password),
 database_(database),
 poolSize_(poolSize),
 heartbeatInterval_(heartbeatInterval) {
-  driver_ = sql::mysql::get_mysql_driver_instance();
+  driver_ = mysql::get_mysql_driver_instance();
   initializePool();
   startHeartbeat();
 }
@@ -27,13 +27,13 @@ MySQLConnectionPool::~MySQLConnectionPool() {
   }
 }
 
-sql::Connection* MySQLConnectionPool::getConnection() {
+Connection* MySQLConnectionPool::getConnection() {
   unique_lock<mutex> lock(mutex_);
   while (connectionPool_.empty()) {
     condition_.wait(lock);
   }
 
-  sql::Connection* conn = connectionPool_.back();
+  Connection* conn = connectionPool_.back();
   connectionPool_.pop_back();
 
   // Check connection validity
@@ -47,7 +47,7 @@ sql::Connection* MySQLConnectionPool::getConnection() {
   return conn;
 }
 
-void MySQLConnectionPool::releaseConnection(sql::Connection* conn) {
+void MySQLConnectionPool::releaseConnection(Connection* conn) {
   unique_lock<mutex> lock(mutex_);
   connectionPool_.push_back(conn);
   condition_.notify_one();
@@ -55,7 +55,7 @@ void MySQLConnectionPool::releaseConnection(sql::Connection* conn) {
 
 void MySQLConnectionPool::initializePool() {
   for (int i = 0; i < poolSize_; ++i) {
-    sql::Connection* conn = driver_->connect(host_, user_, password_);
+    Connection* conn = driver_->connect(host_, user_, password_);
     conn->setSchema(database_);
     connectionPool_.push_back(conn);
   }

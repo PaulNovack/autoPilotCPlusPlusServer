@@ -12,13 +12,14 @@
 #include <boost/variant.hpp>
 
 using namespace std;
+using namespace sql;
 
 class MySQLConnectionPool {
 public:
     MySQLConnectionPool(const string& host, const string& user, const string& password, const string& database, int poolSize, int heartbeatInterval);
     ~MySQLConnectionPool();
-    sql::Connection* getConnection();
-    void releaseConnection(sql::Connection* conn);
+    Connection* getConnection();
+    void releaseConnection(Connection* conn);
 
 
 private:
