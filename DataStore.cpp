@@ -1,5 +1,3 @@
-#include <cppconn/statement.h>
-#include <cppconn/prepared_statement.h>
 #include "DataStore.h"
 
 

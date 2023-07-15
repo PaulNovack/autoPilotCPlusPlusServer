@@ -17,6 +17,9 @@
 #include "json.hpp"
 #include "AppConfig.h"
 #include "mySQLConnectionPool.h"
+#include <cppconn/statement.h>
+#include <cppconn/prepared_statement.h>
+
 namespace PaulNovack {
 
     class DataStore {

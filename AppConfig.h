@@ -2,6 +2,8 @@
 #define CONFIG_HPP
 
 #include <string>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 

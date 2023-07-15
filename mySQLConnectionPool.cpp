@@ -1,7 +1,6 @@
 #include "mySQLConnectionPool.h"
 
 
-
 MySQLConnectionPool::MySQLConnectionPool(const string& host,
         const string& user,
         const string& password,
