@@ -13,7 +13,7 @@ namespace PaulNovack {
         AppConfig(const std::string& filePath);
         int GO_BACK_SECONDS_FOR_SPEED;
         float MIN_SPEED_TO_RUN_STEERING;
-        std::string APP_ROOT;
+        string APP_ROOT;
         float DEGREES_TURN_SIZE_XL;
         float DEGREES_TURN_SIZE_LG;
         float DEGREES_TURN_SIZE_MD;

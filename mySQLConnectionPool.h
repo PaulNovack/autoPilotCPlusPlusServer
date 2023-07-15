@@ -15,7 +15,7 @@ using namespace std;
 
 class MySQLConnectionPool {
 public:
-    MySQLConnectionPool(const std::string& host, const std::string& user, const std::string& password, const std::string& database, int poolSize, int heartbeatInterval);
+    MySQLConnectionPool(const string& host, const string& user, const string& password, const string& database, int poolSize, int heartbeatInterval);
     ~MySQLConnectionPool();
     sql::Connection* getConnection();
     void releaseConnection(sql::Connection* conn);
@@ -28,17 +28,17 @@ private:
     void checkConnections();
 
 private:
-    std::string host_;
-    std::string user_;
-    std::string password_;
-    std::string database_;
+    string host_;
+    string user_;
+    string password_;
+    string database_;
     int poolSize_;
     int heartbeatInterval_;
     sql::mysql::MySQL_Driver* driver_;
-    std::vector<sql::Connection*> connectionPool_;
-    std::mutex mutex_;
-    std::condition_variable condition_;
-    std::thread heartbeatThread_;
+    vector<sql::Connection*> connectionPool_;
+    mutex mutex_;
+    condition_variable condition_;
+    thread heartbeatThread_;
     bool heartbeatRunning_ = true;
 };
 

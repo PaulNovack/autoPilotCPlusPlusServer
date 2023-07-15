@@ -2,10 +2,11 @@
 #include <iostream>
 #include <chrono>
 
-MySQLConnectionPool::MySQLConnectionPool(const std::string& host,
-        const std::string& user,
-        const std::string& password,
-        const std::string& database,
+
+MySQLConnectionPool::MySQLConnectionPool(const string& host,
+        const string& user,
+        const string& password,
+        const string& database,
         int poolSize,
         int heartbeatInterval)
 : host_(host),
@@ -27,7 +28,7 @@ MySQLConnectionPool::~MySQLConnectionPool() {
 }
 
 sql::Connection* MySQLConnectionPool::getConnection() {
-  std::unique_lock<std::mutex> lock(mutex_);
+  unique_lock<mutex> lock(mutex_);
   while (connectionPool_.empty()) {
     condition_.wait(lock);
   }
@@ -47,7 +48,7 @@ sql::Connection* MySQLConnectionPool::getConnection() {
 }
 
 void MySQLConnectionPool::releaseConnection(sql::Connection* conn) {
-  std::unique_lock<std::mutex> lock(mutex_);
+  unique_lock<mutex> lock(mutex_);
   connectionPool_.push_back(conn);
   condition_.notify_one();
 }
@@ -58,17 +59,17 @@ void MySQLConnectionPool::initializePool() {
     conn->setSchema(database_);
     connectionPool_.push_back(conn);
   }
-  std::cout << "Initialize Pool" << std::endl;
+  cout << "Initialize Pool" << endl;
 }
 
 void MySQLConnectionPool::startHeartbeat() {
-  heartbeatThread_ = std::thread([this]() {
+  heartbeatThread_ = thread([this]() {
     while (heartbeatRunning_) {
-      std::this_thread::sleep_for(std::chrono::seconds(heartbeatInterval_));
+      this_thread::sleep_for(chrono::seconds(heartbeatInterval_));
       checkConnections();
     }
   });
-  std::cout << "Started Heartbeat" << std::endl;
+  cout << "Started Heartbeat" << endl;
 }
 
 void MySQLConnectionPool::stopHeartbeat() {
@@ -79,15 +80,15 @@ void MySQLConnectionPool::stopHeartbeat() {
 }
 
 void MySQLConnectionPool::checkConnections() {
-  std::lock_guard<std::mutex> lock(mutex_);
+  lock_guard<mutex> lock(mutex_);
   for (auto& conn : connectionPool_) {
     if (!conn->isValid()) {
       delete conn;
       conn = driver_->connect(host_, user_, password_);
       conn->setSchema(database_);
-      std::cout << "Reconnected Connection" << std::endl;
+      cout << "Reconnected Connection" << endl;
     }
-    std::cout << "Checked Connection" << std::endl;
+    cout << "Checked Connection" << endl;
   }
-  std::cout << "Checked all Connections" << std::endl;
+  cout << "Checked all Connections" << endl;
 }
