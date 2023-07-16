@@ -11,7 +11,6 @@
       <itemPath>GPSParser.h</itemPath>
       <itemPath>GPSReader.h</itemPath>
       <itemPath>GPSUtils.h</itemPath>
-      <itemPath>GPSWebServer.h</itemPath>
       <itemPath>Navigation.h</itemPath>
       <itemPath>PaulNovackGlobals.h</itemPath>
       <itemPath>WebServer.h</itemPath>
@@ -34,7 +33,6 @@
       <itemPath>GPSParser.cpp</itemPath>
       <itemPath>GPSReader.cpp</itemPath>
       <itemPath>GPSUtils.cpp</itemPath>
-      <itemPath>GPSWebServer.cpp</itemPath>
       <itemPath>Navigation.cpp</itemPath>
       <itemPath>WebServer.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -107,10 +105,6 @@
       <item path="GPSUtils.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="GPSUtils.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="GPSWebServer.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="GPSWebServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Navigation.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -194,10 +188,6 @@
       <item path="GPSUtils.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="GPSUtils.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="GPSWebServer.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="GPSWebServer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Navigation.cpp" ex="false" tool="1" flavor2="0">
       </item>

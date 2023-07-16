@@ -42,7 +42,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/GPSParser.o \
 	${OBJECTDIR}/GPSReader.o \
 	${OBJECTDIR}/GPSUtils.o \
-	${OBJECTDIR}/GPSWebServer.o \
 	${OBJECTDIR}/Navigation.o \
 	${OBJECTDIR}/WebServer.o \
 	${OBJECTDIR}/main.o \
@@ -107,11 +106,6 @@ ${OBJECTDIR}/GPSUtils.o: GPSUtils.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GPSUtils.o GPSUtils.cpp
-
-${OBJECTDIR}/GPSWebServer.o: GPSWebServer.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g `pkg-config --cflags libmariadb` -std=c++14  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GPSWebServer.o GPSWebServer.cpp
 
 ${OBJECTDIR}/Navigation.o: Navigation.cpp
 	${MKDIR} -p ${OBJECTDIR}
