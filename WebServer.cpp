@@ -129,22 +129,13 @@ namespace PaulNovack {
                 // Parse the JSON data from the request body
                 json jsonData = json::parse(req.body);
 
-                // Extract the destinationLatitude and destinationLongitude values
                 float destinationLatitude = jsonData["destinationLatitude"];
                 float destinationLongitude = jsonData["destinationLongitude"];
-
-                // Create a JSON response with the extracted values
                 json response;
                 response["destinationLatitude"] = destinationLatitude;
                 response["destinationLongitude"] = destinationLongitude;
                 _navigation->setDestination(destinationLatitude, destinationLongitude);
-                // Set the response body with the JSON data
                 res.body = response.dump();
-
-                // Set the Content-Type header to application/json
-
-
-                // Set the response status to 200 OK
                 res.code = 200;
               } catch (const std::exception& e) {
                 // Handle any parsing errors or other exceptions
@@ -177,27 +168,32 @@ namespace PaulNovack {
       res.code = 200;
       res.end();
     });
-    CROW_ROUTE(app, "/deleteWaypoint")([this](const crow::request& req, crow::response & res) {
-      std::map<int, WayPoint> waypoints = _ds->getWayPoints();
-      json jsonResponse = json::array();
-      for (const auto& pair : waypoints) {
-        int id = pair.first;
-                const WayPoint& waypoint = pair.second;
-                json waypointJson;
-                waypointJson["id"] = id;
-                waypointJson["name"] = waypoint.name;
-                waypointJson["description"] = waypoint.description;
-                waypointJson["latitude"] = waypoint.latitude;
-                waypointJson["longitude"] = waypoint.longitude;
-                waypointJson["depth"] = waypoint.depth;
-                jsonResponse.push_back(waypointJson);
-      } // Set the response body with the JSON data
-      res.body = jsonResponse.dump();
+    CROW_ROUTE(app, "/insertWaypoint")
+            .methods("POST"_method)
+            ([this](const crow::request& req, crow::response & res) {
+              crow::json::rvalue wayPoint = crow::json::load(req.body);
 
-      // Set the response status to 200 OK
-      res.code = 200;
-      res.end();
-    });
+              WayPoint wp;
+              // Extract values from the JSON and set variables
+              wp.depth = wayPoint["depth"].d();
+              wp.description = wayPoint["description"].s();
+              wp.latitude = wayPoint["latitude"].d();
+              wp.longitude = wayPoint["longitude"].d();
+              wp.name = wayPoint["name"].s();
+              wp.id = _ds->insertWayPoint(wp);
+
+              json waypointJson;
+              waypointJson["depth"] = wp.depth;
+              waypointJson["description"] = wp.description;
+              waypointJson["latitude"] = wp.latitude;
+              waypointJson["longitude"] = wp.longitude;
+              waypointJson["name"] = wp.name;
+              waypointJson["id"] = wp.id;
+              res.body = waypointJson.dump();
+              res.code = 200;
+              res.end();
+            });
+
     CROW_ROUTE(app, "/updateWaypoint")
             .methods("POST"_method)
             ([this](const crow::request & req) {
@@ -225,27 +221,7 @@ namespace PaulNovack {
               response["name"] = wp.name;
               return crow::response(200);
             });
-    CROW_ROUTE(app, "/insertWaypoint")
-            .methods("POST"_method)
-            ([this](const crow::request & req) {
-              crow::json::wvalue response;
-              // Parse the JSON data from the request body
-              crow::json::rvalue json = crow::json::load(req.body);
-              if (!json) {
-                // JSON parsing failed
-                return crow::response(400);
-              }
-              WayPoint wp;
-              // Extract values from the JSON and set variables
-              wp.depth = json["depth"].d();
-              wp.description = json["description"].s();
-              wp.latitude = json["latitude"].d();
-              wp.longitude = json["longitude"].d();
-              wp.name = json["name"].s();
-              int id = _ds->insertWayPoint(wp);
-              response["id"] = id;
-              return crow::response(200);
-            });
+
     CROW_ROUTE(app, "/")([this]() {
       return "AutoPilot Server.  Nothing here routes return JSON for UI.";
     });

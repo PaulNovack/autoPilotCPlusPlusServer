@@ -87,8 +87,11 @@ namespace PaulNovack {
     pstmt->setDouble(4, wayPoint.longitude);
     pstmt->setDouble(5, wayPoint.depth);
 
-    pstmt->executeUpdate();
-    res = pstmt->executeQuery("select LAST_INSERT_ID()");
+    if(!(pstmt->executeUpdate())){
+      cout << "Error executing insert" << endl;
+    }
+    pstmt = conn->prepareStatement("select last_insert_id();");
+    res = pstmt->executeQuery();
 
     // Get the insert ID
     int insertID = 0;
