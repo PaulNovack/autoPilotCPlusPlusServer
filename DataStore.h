@@ -31,7 +31,7 @@ namespace PaulNovack {
         DataStore(const DataStore& orig);
         virtual ~DataStore();
         map<int, WayPoint> getWayPoints();
-        WayPoint insertWayPoint(WayPoint wayPoint);
+        int insertWayPoint(WayPoint wayPoint);
         WayPoint updateWayPoint(WayPoint wayPoint);
         bool deleteWayPoint(WayPoint wayPoint);
     private:

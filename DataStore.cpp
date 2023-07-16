@@ -56,13 +56,13 @@ namespace PaulNovack {
     return WayPointsMap;
   }
 
-  WayPoint DataStore::insertWayPoint(WayPoint wayPoint) {
+  WayPoint DataStore::updateWayPoint(WayPoint wayPoint) {
     sql::Connection* conn = connectionPool_->getConnection();
     sql::PreparedStatement* pstmt;
     WayPoint wp;
 
-    pstmt = conn->prepareStatement("UPDATE boxes SET user_id = ?, "
-            "name = ?, weight = ?, picture = ?, created_at = ? "
+    pstmt = conn->prepareStatement("update waypoints SET name = ?, "
+            "description = ?, latitude = ?, longitude = ?, depth = ? "
             "WHERE id = ?");
     //  pstmt->setInt(1, root["user_id"].asInt64);
     //   pstmt->setString(2, root["name"].asString());
@@ -74,22 +74,29 @@ namespace PaulNovack {
     return wp;
   }
 
-  WayPoint DataStore::updateWayPoint(WayPoint wayPoint) {
+  int DataStore::insertWayPoint(WayPoint wayPoint) {
     sql::Connection* conn = connectionPool_->getConnection();
     sql::PreparedStatement* pstmt;
-    WayPoint wp;
+    sql::ResultSet *res;
+    pstmt = conn->prepareStatement("insert into waypoints (name, "
+            " description, latitude, longitude, depth) values "
+            "(?,?,?,?,?) ");
+    pstmt->setString(1, wayPoint.name);
+    pstmt->setString(2, wayPoint.description);
+    pstmt->setDouble(3, wayPoint.latitude);
+    pstmt->setDouble(4, wayPoint.longitude);
+    pstmt->setDouble(5, wayPoint.depth);
 
-    pstmt = conn->prepareStatement("UPDATE boxes SET user_id = ?, "
-            "name = ?, weight = ?, picture = ?, created_at = ? "
-            "WHERE id = ?");
-    //  pstmt->setInt(1, root["user_id"].asInt64);
-    //   pstmt->setString(2, root["name"].asString());
-    //   pstmt->setfloat(3, root["weight"].asfloat());
-    //  pstmt->setString(4, root["picture"].asString());
-    //   pstmt->setString(5, root["created_at"].asString());
-    //   pstmt->setInt64(6, root["id"].asInt64);
-    // pstmt->executeUpdate();
-    return wp;
+    pstmt->executeUpdate();
+    res = pstmt->executeQuery("select last_insert_id()");
+
+    // Get the insert ID
+    int insertID = 0;
+    if (res->next()) {
+      insertID = res->getInt(1);
+    }
+
+    return insertID;
   }
 
   bool DataStore::deleteWayPoint(WayPoint wayPoint) {
@@ -109,4 +116,4 @@ namespace PaulNovack {
     // pstmt->executeUpdate();
     return true;
   }
-} 
+}
