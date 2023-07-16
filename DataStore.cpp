@@ -64,13 +64,13 @@ namespace PaulNovack {
     pstmt = conn->prepareStatement("update waypoints SET name = ?, "
             "description = ?, latitude = ?, longitude = ?, depth = ? "
             "WHERE id = ?");
-    //  pstmt->setInt(1, root["user_id"].asInt64);
-    //   pstmt->setString(2, root["name"].asString());
-    //   pstmt->setfloat(3, root["weight"].asfloat());
-    //  pstmt->setString(4, root["picture"].asString());
-    //   pstmt->setString(5, root["created_at"].asString());
-    //   pstmt->setInt64(6, root["id"].asInt64);
-    // pstmt->executeUpdate();
+    pstmt->setString(1, wayPoint.name);
+    pstmt->setString(2, wayPoint.description);
+    pstmt->setDouble(3, wayPoint.latitude);
+    pstmt->setDouble(4, wayPoint.longitude);
+    pstmt->setDouble(5, wayPoint.depth);
+    pstmt->setInt(5, wayPoint.id);
+    pstmt->executeUpdate();
     return wp;
   }
 
@@ -88,7 +88,7 @@ namespace PaulNovack {
     pstmt->setDouble(5, wayPoint.depth);
 
     pstmt->executeUpdate();
-    res = pstmt->executeQuery("select last_insert_id()");
+    res = pstmt->executeQuery("select LAST_INSERT_ID()");
 
     // Get the insert ID
     int insertID = 0;
