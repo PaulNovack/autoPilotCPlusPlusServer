@@ -70,6 +70,7 @@ namespace PaulNovack {
     pstmt->setDouble(5, wayPoint.depth);
     pstmt->setInt(6, wayPoint.id);
     pstmt->executeUpdate();
+    connectionPool_->releaseConnection(conn);
     return wayPoint;
   }
 
@@ -97,7 +98,7 @@ namespace PaulNovack {
     if (res->next()) {
       insertID = res->getInt(1);
     }
-
+    connectionPool_->releaseConnection(conn);
     return insertID;
   }
 
@@ -109,6 +110,7 @@ namespace PaulNovack {
     pstmt = conn->prepareStatement("delete waypoints where id = ? ");
     pstmt->setInt(1, wayPoint.id);
     pstmt->executeUpdate();
+    connectionPool_->releaseConnection(conn);
     return true;
   }
 }
