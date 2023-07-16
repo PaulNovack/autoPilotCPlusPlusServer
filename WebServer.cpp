@@ -193,33 +193,33 @@ namespace PaulNovack {
               res.code = 200;
               res.end();
             });
-
     CROW_ROUTE(app, "/updateWaypoint")
             .methods("POST"_method)
-            ([this](const crow::request & req) {
-              crow::json::wvalue response;
-              // Parse the JSON data from the request body
-              crow::json::rvalue json = crow::json::load(req.body);
-              if (!json) {
-                // JSON parsing failed
-                return crow::response(400);
-              }
+            ([this](const crow::request& req, crow::response & res) {
+              crow::json::rvalue wayPoint = crow::json::load(req.body);
+
               WayPoint wp;
               // Extract values from the JSON and set variables
-              wp.id = json["id"].i();
-              wp.depth = json["depth"].d();
-              wp.description = json["description"].s();
-              wp.latitude = json["latitude"].d();
-              wp.longitude = json["longitude"].d();
-              wp.name = json["name"].s();
+              wp.depth = wayPoint["depth"].d();
+              wp.description = wayPoint["description"].s();
+              wp.latitude = wayPoint["latitude"].d();
+              wp.longitude = wayPoint["longitude"].d();
+              wp.name = wayPoint["name"].s();
+              wp.id = wayPoint["id"].i();
+              
               wp = _ds->updateWayPoint(wp);
-              response["id"] = wp.id;
-              response["depth"] = wp.depth;
-              response["description"] = wp.description;
-              response["latitude"] = wp.latitude;
-              response["longitude"] = wp.longitude;
-              response["name"] = wp.name;
-              return crow::response(200);
+
+
+              json waypointJson;
+              waypointJson["depth"] = wp.depth;
+              waypointJson["description"] = wp.description;
+              waypointJson["latitude"] = wp.latitude;
+              waypointJson["longitude"] = wp.longitude;
+              waypointJson["name"] = wp.name;
+              waypointJson["id"] = wp.id;
+              res.body = waypointJson.dump();
+              res.code = 200;
+              res.end();
             });
 
     CROW_ROUTE(app, "/")([this]() {

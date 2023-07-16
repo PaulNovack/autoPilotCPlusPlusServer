@@ -59,8 +59,7 @@ namespace PaulNovack {
   WayPoint DataStore::updateWayPoint(WayPoint wayPoint) {
     sql::Connection* conn = connectionPool_->getConnection();
     sql::PreparedStatement* pstmt;
-    WayPoint wp;
-
+   
     pstmt = conn->prepareStatement("update waypoints SET name = ?, "
             "description = ?, latitude = ?, longitude = ?, depth = ? "
             "WHERE id = ?");
@@ -69,9 +68,12 @@ namespace PaulNovack {
     pstmt->setDouble(3, wayPoint.latitude);
     pstmt->setDouble(4, wayPoint.longitude);
     pstmt->setDouble(5, wayPoint.depth);
-    pstmt->setInt(5, wayPoint.id);
-    pstmt->executeUpdate();
-    return wp;
+    pstmt->setInt(6, wayPoint.id);
+    if(!(pstmt->executeUpdate())){
+      cout << "Error executing update" << endl;
+    }
+    cout << "Ok to here" << endl;
+    return wayPoint;
   }
 
   int DataStore::insertWayPoint(WayPoint wayPoint) {
