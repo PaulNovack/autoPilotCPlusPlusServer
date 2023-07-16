@@ -221,7 +221,25 @@ namespace PaulNovack {
               res.code = 200;
               res.end();
             });
+    CROW_ROUTE(app, "/deleteWaypoint")
+            .methods("POST"_method)
+            ([this](const crow::request& req, crow::response & res) {
+              crow::json::rvalue wayPoint = crow::json::load(req.body);
 
+              WayPoint wp;
+              // Extract values from the JSON and set variables
+              wp.depth = wayPoint["depth"].d();
+              wp.description = wayPoint["description"].s();
+              wp.latitude = wayPoint["latitude"].d();
+              wp.longitude = wayPoint["longitude"].d();
+              wp.name = wayPoint["name"].s();
+              wp.id = wayPoint["id"].i();
+              _ds->deleteWayPoint(wp);
+              json waypointJson;
+              res.body = waypointJson.dump();
+              res.code = 200;
+              res.end();
+            });
     CROW_ROUTE(app, "/")([this]() {
       return "AutoPilot Server.  Nothing here routes return JSON for UI.";
     });

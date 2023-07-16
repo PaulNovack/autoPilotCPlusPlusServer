@@ -59,7 +59,7 @@ namespace PaulNovack {
   WayPoint DataStore::updateWayPoint(WayPoint wayPoint) {
     sql::Connection* conn = connectionPool_->getConnection();
     sql::PreparedStatement* pstmt;
-   
+
     pstmt = conn->prepareStatement("update waypoints SET name = ?, "
             "description = ?, latitude = ?, longitude = ?, depth = ? "
             "WHERE id = ?");
@@ -69,10 +69,7 @@ namespace PaulNovack {
     pstmt->setDouble(4, wayPoint.longitude);
     pstmt->setDouble(5, wayPoint.depth);
     pstmt->setInt(6, wayPoint.id);
-    if(!(pstmt->executeUpdate())){
-      cout << "Error executing update" << endl;
-    }
-    cout << "Ok to here" << endl;
+    pstmt->executeUpdate();
     return wayPoint;
   }
 
@@ -89,7 +86,7 @@ namespace PaulNovack {
     pstmt->setDouble(4, wayPoint.longitude);
     pstmt->setDouble(5, wayPoint.depth);
 
-    if(!(pstmt->executeUpdate())){
+    if (!(pstmt->executeUpdate())) {
       cout << "Error executing insert" << endl;
     }
     pstmt = conn->prepareStatement("select last_insert_id();");
@@ -107,18 +104,11 @@ namespace PaulNovack {
   bool DataStore::deleteWayPoint(WayPoint wayPoint) {
     sql::Connection* conn = connectionPool_->getConnection();
     sql::PreparedStatement* pstmt;
-    WayPoint wp;
 
-    pstmt = conn->prepareStatement("UPDATE boxes SET user_id = ?, "
-            "name = ?, weight = ?, picture = ?, created_at = ? "
-            "WHERE id = ?");
-    //  pstmt->setInt(1, root["user_id"].asInt64);
-    //   pstmt->setString(2, root["name"].asString());
-    //   pstmt->setfloat(3, root["weight"].asfloat());
-    //  pstmt->setString(4, root["picture"].asString());
-    //   pstmt->setString(5, root["created_at"].asString());
-    //   pstmt->setInt64(6, root["id"].asInt64);
-    // pstmt->executeUpdate();
+
+    pstmt = conn->prepareStatement("delete waypoints where id = ? ");
+    pstmt->setInt(1, wayPoint.id);
+    pstmt->executeUpdate();
     return true;
   }
 }
