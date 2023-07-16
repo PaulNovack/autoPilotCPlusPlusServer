@@ -20,6 +20,8 @@
 #include <cppconn/statement.h>
 #include <cppconn/prepared_statement.h>
 
+using namespace std;
+
 namespace PaulNovack {
 
     class DataStore {
@@ -28,7 +30,7 @@ namespace PaulNovack {
 
         DataStore(const DataStore& orig);
         virtual ~DataStore();
-        std::map<int, WayPoint> getWayPoints();
+        map<int, WayPoint> getWayPoints();
         WayPoint insertWayPoint(WayPoint wayPoint);
         WayPoint updateWayPoint(WayPoint wayPoint);
         bool deleteWayPoint(WayPoint wayPoint);
