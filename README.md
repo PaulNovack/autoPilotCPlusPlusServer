@@ -16,4 +16,3 @@ Navigation Logic and all Geospatial code about 90% done.
 Adding config .env and adding Crow Web Framework to communitate with React Web Front end right now.....
 
 
-## For Part 1 of Blog Checkout Branch blog-part-2
