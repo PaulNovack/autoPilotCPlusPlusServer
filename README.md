@@ -13,6 +13,6 @@ Navigation Logic and all Geospatial code about 90% done.
 
 
 
-Adding config .env and adding Crow Web Framework to communitate with React Web Front end right now.....
+Working on React Web Front end right now.....
 
 
