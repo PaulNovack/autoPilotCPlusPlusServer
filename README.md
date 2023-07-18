@@ -11,6 +11,7 @@ Stepper motor control about 80% done have to add limiting max steps.
 
 Navigation Logic and all Geospatial code about 90% done.
 
+WebServer for React Front End done enough to develop front end UI code in React
 
 
 Working on React Web Front end right now.....
