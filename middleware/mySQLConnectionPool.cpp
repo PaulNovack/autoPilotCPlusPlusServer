@@ -2,85 +2,86 @@
 #include <iostream>
 #include <chrono>
 
-MySQLConnectionPool::MySQLConnectionPool(const std::string& host, const std::string& user, const std::string& password, const std::string& database, int poolSize, int heartbeatInterval)
-    : host_(host), user_(user), password_(password), database_(database), poolSize_(poolSize), heartbeatInterval_(heartbeatInterval) {
-    driver_ = sql::mysql::get_mysql_driver_instance();
+MySQLConnectionPool::MySQLConnectionPool(const std::string& host, const std::string& user, const std::string& password, const std::string& database, int poolSize, int heartbeatInterval) : host_(host), 
+user_(user), password_(password), database_(database), poolSize_(poolSize), heartbeatInterval_(heartbeatInterval), driver_(nullptr), connectionPool_(), mutex_(), condition_(), heartbeatThread_() {
     initializePool();
     startHeartbeat();
 }
 
 MySQLConnectionPool::~MySQLConnectionPool() {
     stopHeartbeat();
-    for (auto& conn : connectionPool_) {
-        delete conn;
+    // Check if the heartbeat thread is still running before joining it
+    if (heartbeatThread_.joinable()) {
+        heartbeatThread_.join();
     }
 }
 
-
-
-
 sql::Connection* MySQLConnectionPool::getConnection() {
-    std::unique_lock<std::mutex> lock(mutex_);
-    while (connectionPool_.empty()) {
-        condition_.wait(lock);
+    std::lock_guard<std::mutex> lock(mutex_);
+    // Check if there are any available connections in the pool
+    if (!connectionPool_.empty()) {
+        // Return an available connection from the pool
+        return connectionPool_.back();
+    } else {
+        // Create a new connection and add it to the pool
+        sql::Connection* conn = driver_->connect(host_, user_, password_);
+        if (conn != nullptr) {
+            connectionPool_.push_back(conn);
+            return conn;
+        } else {
+            throw std::runtime_error("Failed to create new database connection");
+        }
     }
-
-    sql::Connection* conn = connectionPool_.back();
-    connectionPool_.pop_back();
-
-    // Check connection validity
-    if (!conn->isValid()) {
-        delete conn;
-        conn = driver_->connect(host_, user_, password_);
-        conn->setSchema(database_);
-        connectionPool_.push_back(conn);
-    }
-
-    return conn;
 }
 
 void MySQLConnectionPool::releaseConnection(sql::Connection* conn) {
-    std::unique_lock<std::mutex> lock(mutex_);
-    connectionPool_.push_back(conn);
-    condition_.notify_one();
+    // Check if the connection is in use before releasing it back to the pool
+    if (conn->isInUse()) {
+        throw std::runtime_error("Cannot release a connection that is still in use");
+    } else {
+        // Release the connection back to the pool
+        conn->release();
+    }
 }
 
 void MySQLConnectionPool::initializePool() {
-    for (int i = 0; i < poolSize_; ++i) {
+    for (int i = 0; i < poolSize_; i++) {
         sql::Connection* conn = driver_->connect(host_, user_, password_);
-        conn->setSchema(database_);
-        connectionPool_.push_back(conn);
+        if (conn != nullptr) {
+            connectionPool_.push_back(conn);
+        } else {
+            throw std::runtime_error("Failed to create new database connection");
+        }
     }
-    std::cout << "Initialize Pool" << std::endl;
 }
 
 void MySQLConnectionPool::startHeartbeat() {
-    heartbeatThread_ = std::thread([this]() {
+    heartbeatThread_ = std::thread([this](){
         while (heartbeatRunning_) {
-            std::this_thread::sleep_for(std::chrono::seconds(heartbeatInterval_));
             checkConnections();
+            std::this_thread::sleep_for(std::chrono::seconds(heartbeatInterval_));
         }
     });
-    std::cout << "Started Heartbeat" << std::endl;
 }
 
 void MySQLConnectionPool::stopHeartbeat() {
+    // Set the heartbeat running flag to false
+    heartbeatRunning_ = false;
+    // Join the heartbeat thread with the main thread
     if (heartbeatThread_.joinable()) {
-        heartbeatRunning_ = false;
         heartbeatThread_.join();
     }
 }
 
 void MySQLConnectionPool::checkConnections() {
     std::lock_guard<std::mutex> lock(mutex_);
-    for (auto& conn : connectionPool_) {
-        if (!conn->isValid()) {
-            delete conn;
-            conn = driver_->connect(host_, user_, password_);
-            conn->setSchema(database_);
-            std::cout << "Reconnected Connection" << std::endl;
+    // Check each connection in the pool and remove any invalid connections
+    for (auto it = connectionPool_.begin(); it != connectionPool_.end(); ) {
+        if (!(*it)->isValid()) {
+            delete *it;
+            it = connectionPool_.erase(it);
+        } else {
+            ++it;
         }
-        std::cout << "Checked Connection" << std::endl;
     }
-    std::cout << "Checked all Connections" << std::endl;
 }
